@@ -10,9 +10,9 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "home_workshop_misc:beer_tap",
 	recipe = {
-		{ "group:stick",                       "default:steel_ingot", "group:stick" },
-		{ "home_workshop_misc:kitchen_faucet", "default:steel_ingot", "home_workshop_misc:kitchen_faucet" },
-		{ "default:steel_ingot",               "default:steel_ingot", "default:steel_ingot" }
+		{ "group:stick",               "default:steel_ingot", "group:stick" },
+		{ "basic_materials:steel_bar", "default:steel_ingot", "basic_materials:steel_bar" },
+		{ "default:steel_ingot",       "default:steel_ingot", "default:steel_ingot" }
 	},
 })
 
