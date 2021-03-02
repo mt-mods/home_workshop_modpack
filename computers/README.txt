@@ -35,8 +35,6 @@ These are the items currently defined by this mod:
 "computers:server",
 "computers:server_on",
 "computers:printer",
-"computers:3dprinter_bedflinger",
-"computers:3dprinter_corexy",
 "computers:tetris_arcade",
 
 There's also a `computers:computer' alias to `computers:babytower'.

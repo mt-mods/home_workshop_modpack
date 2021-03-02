@@ -93,7 +93,6 @@ end
 
 local MODPATH = minetest.get_modpath("computers")
 dofile(MODPATH.."/computers.lua")
-dofile(MODPATH.."/printers.lua")
 dofile(MODPATH.."/recipes.lua")
 dofile(MODPATH.."/gaming.lua")
 dofile(MODPATH.."/aliases.lua")

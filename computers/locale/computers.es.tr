@@ -1,4 +1,4 @@
-# textdomain: computer
+# textdomain: computers
 
 
 ### computers.lua ###
@@ -18,10 +18,6 @@ SX Specter=
 SheFriendSOO=
 Snapple Piepad=
 WIFI Router=Enrutador WIFI
-
-### printers.lua ###
-
-3D Printer ("bedflinger")=
 Printer-Scanner Combo=Impresora y escáner combinados
 
 ### tetris.lua ###
