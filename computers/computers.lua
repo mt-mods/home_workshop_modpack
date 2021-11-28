@@ -116,7 +116,9 @@ minetest.register_node("computers:monitor", {
 	inventory_image = "computers_monitor_inv.png",
 	drawtype = "mesh",
 	mesh = "computers_monitor.obj",
-	tiles = {"computers_black.png", "computers_monitor_plastic.png", "computers_black.png", "computers_monitor_plastic.png"},
+	tiles = {
+		"computers_black.png", "computers_monitor_plastic.png", "computers_black.png", "computers_monitor_plastic.png"
+	},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	walkable = false,
@@ -132,7 +134,12 @@ minetest.register_node("computers:monitor", {
 minetest.register_node("computers:monitor_on", {
 	drawtype = "mesh",
 	mesh = "computers_monitor.obj",
-	tiles = {"computers_monitor_display.png^[transformFX", "computers_monitor_plastic.png", "computers_black.png", "computers_monitor_plastic.png"},
+	tiles = {
+		"computers_monitor_display.png^[transformFX",
+		"computers_monitor_plastic.png",
+		"computers_black.png",
+		"computers_monitor_plastic.png"
+	},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	light_source = 9,
