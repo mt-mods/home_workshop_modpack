@@ -79,7 +79,7 @@ minetest.register_node("home_workshop_misc:beer_mug", {
 	sounds = default.node_sound_glass_defaults(),
 	selection_box = beer_cbox,
 	on_use = function(itemstack, user, pointed_thing)
-		if not creative.is_enabled_for(user:get_player_name()) then
+		if not minetest.is_creative_enabled_for(user:get_player_name()) then
 			minetest.do_item_eat(2, "vessels:drinking_glass 1", itemstack, user, pointed_thing)
 			return itemstack
 		end
@@ -116,7 +116,7 @@ minetest.register_node("home_workshop_misc:soda_machine", {
 			minetest.sound_play("insert_coin", {
 				pos=pos, max_hear_distance = 5
 			})
-			if not creative.is_enabled_for(playername) then
+			if not minetest.is_creative_enabled_for(playername) then
 				wielditem:take_item()
 				clicker:set_wielded_item(wielditem)
 				return wielditem
