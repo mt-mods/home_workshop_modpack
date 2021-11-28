@@ -7,7 +7,7 @@ globals = {
     "minetest", "core",
 
     --mod provided
-
+    "home_vending_machines",
 }
 
 read_globals = {

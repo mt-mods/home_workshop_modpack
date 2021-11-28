@@ -79,58 +79,11 @@ minetest.register_node("home_workshop_misc:beer_mug", {
 	sounds = default.node_sound_glass_defaults(),
 	selection_box = beer_cbox,
 	on_use = function(itemstack, user, pointed_thing)
-		if not minetest.is_creative_enabled_for(user:get_player_name()) then
+		if not minetest.is_creative_enabled(user:get_player_name()) then
 			minetest.do_item_eat(2, "vessels:drinking_glass 1", itemstack, user, pointed_thing)
 			return itemstack
 		end
 	end
-})
-
-local svm_cbox = {
-	type = "fixed",
-	fixed = {-0.5, -0.5, -0.5, 0.5, 1.5, 0.5}
-}
-
-minetest.register_node("home_workshop_misc:soda_machine", {
-	description = S("Soda vending machine"),
-	drawtype = "mesh",
-	mesh = "home_workshop_misc_soda_machine.obj",
-	tiles = {"home_workshop_misc_soda_machine.png"},
-	paramtype = "light",
-	paramtype2 = "facedir",
-	groups = {snappy=3},
-	selection_box = svm_cbox,
-	collision_box = svm_cbox,
-	expand = { top="placeholder" },
-	sounds = default.node_sound_wood_defaults(),
-	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.rotate_simple or nil,
-	on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-		local playername = clicker:get_player_name()
-		local wielditem = clicker:get_wielded_item()
-		local wieldname = wielditem:get_name()
-		local fdir_to_fwd = { {0, -1}, {-1, 0}, {0, 1}, {1, 0} }
-		local fdir = node.param2
-		local pos_drop = { x=pos.x+fdir_to_fwd[fdir+1][1], y=pos.y, z=pos.z+fdir_to_fwd[fdir+1][2] }
-		if wieldname == "currency:minegeld_cent_25" then
-			minetest.spawn_item(pos_drop, "home_workshop_misc:soda_can")
-			minetest.sound_play("insert_coin", {
-				pos=pos, max_hear_distance = 5
-			})
-			if not minetest.is_creative_enabled_for(playername) then
-				wielditem:take_item()
-				clicker:set_wielded_item(wielditem)
-				return wielditem
-			end
-		else
-			minetest.chat_send_player(playername, S("Please insert a 25 Mg cent coin in the machine."))
-		end
-	end
-})
-
-minetest.register_craftitem("home_workshop_misc:soda_can", {
-	description = S("Soda Can"),
-	inventory_image = "home_workshop_misc_soda_can.png",
-	on_use = minetest.item_eat(2),
 })
 
 if minetest.get_modpath("homedecor_common") then
