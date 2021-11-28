@@ -1,4 +1,5 @@
 home_vending_machines.register_currency("default:gold_ingot", 1)
+home_vending_machines.register_currency("currency:minegeld_cent_25", 1)
 
 home_vending_machines.register_machine("simple", "home_workshop_misc:soda_machine", {
     description = "Soda vending machine",

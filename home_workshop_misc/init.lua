@@ -79,7 +79,7 @@ minetest.register_node("home_workshop_misc:beer_mug", {
 	sounds = default.node_sound_glass_defaults(),
 	selection_box = beer_cbox,
 	on_use = function(itemstack, user, pointed_thing)
-		if not minetest.is_creative_enabled_for(user:get_player_name()) then
+		if not minetest.is_creative_enabled(user:get_player_name()) then
 			minetest.do_item_eat(2, "vessels:drinking_glass 1", itemstack, user, pointed_thing)
 			return itemstack
 		end
