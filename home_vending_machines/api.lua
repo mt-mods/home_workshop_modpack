@@ -38,7 +38,7 @@ local function reg_simple(name, def)
                     item = item[math.random(#item)]
                 end
 
-                minetest.spawn_item(dpos, item)
+                minetest.add_item(dpos, item)
 
                 if not minetest.is_creative_enabled(pname) then
                     itemstack:take_item()

@@ -91,7 +91,7 @@ if minetest.get_modpath("homedecor_common") then
 else
 	minetest.register_craftitem("home_workshop_misc:drawer_small", {
 			description = S("Small Wooden Drawer"),
-			inventory_image = "home_workshop_machines_drawer_small.png",
+			inventory_image = "home_workshop_common_drawer_small.png",
 	})
 end
 
