@@ -93,6 +93,7 @@ end
 
 local MODPATH = minetest.get_modpath("computers")
 dofile(MODPATH.."/computers.lua")
-dofile(MODPATH.."/recipes.lua")
 dofile(MODPATH.."/gaming.lua")
 dofile(MODPATH.."/aliases.lua")
+
+if minetest.get_modpath("default") and minetest.get_modpath("basic_materials") then dofile(MODPATH.."/recipes.lua") end

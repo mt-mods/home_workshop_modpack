@@ -47,3 +47,5 @@ Thanks to all the people in the forums and the #minetest IRC channel for
 
 See also:
 http://minetest.net/
+
+license WTFPL https://github.com/minetest-mods/computer/blob/master/README.txt#L36-L38
