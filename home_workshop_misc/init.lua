@@ -76,7 +76,7 @@ minetest.register_node("home_workshop_misc:beer_mug", {
 	paramtype2 = "facedir",
 	groups = { snappy=3, oddly_breakable_by_hand=3 },
 	walkable = false,
-	sounds = default.node_sound_glass_defaults(),
+	sounds = default and default.node_sound_glass_defaults() or nil,
 	selection_box = beer_cbox,
 	on_use = function(itemstack, user, pointed_thing)
 		if not minetest.is_creative_enabled(user:get_player_name()) then
@@ -96,7 +96,9 @@ else
 end
 
 local MODPATH = minetest.get_modpath("home_workshop_misc")
-dofile(MODPATH.."/crafts.lua")
+if minetest.get_modpath("default") and minetest.get_modpath("basic_materials") then
+	dofile(MODPATH.."/crafts.lua")
+end
 
 minetest.register_alias("homedecor:tool_cabinet",        "home_workshop_misc:tool_cabinet")
 minetest.register_alias("homedecor:tool_cabinet_bottom", "home_workshop_misc:tool_cabinet")

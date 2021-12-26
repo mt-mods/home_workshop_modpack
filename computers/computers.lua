@@ -80,7 +80,7 @@ minetest.register_node("computers:piepad", {
 	walkable = false,
 	groups = {oddly_breakable_by_hand=2},
 	selection_box = {type = "wallmounted"},
-	sounds = default.node_sound_wood_defaults()
+	sounds = default and default.node_sound_wood_defaults() or nil
 })
 
 -- Commodore 64 lookalike
@@ -173,7 +173,7 @@ minetest.register_node("computers:router", {
 	paramtype2 = "facedir",
 	walkable = false,
 	groups = {snappy=3},
-	sound = default.node_sound_wood_defaults(),
+	sound = default and default.node_sound_wood_defaults() or nil,
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
@@ -201,7 +201,7 @@ minetest.register_node("computers:tower", {
 	paramtype = "light",
 	paramtype2 = "facedir",
 	groups = {snappy=3},
-	sound = default.node_sound_wood_defaults(),
+	sound = default and default.node_sound_wood_defaults() or nil,
 	selection_box = pct_cbox,
 	collision_box = pct_cbox
 })
@@ -230,7 +230,7 @@ minetest.register_node("computers:server", {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.25, 0.5, 1.125, 0.4375}
 	},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = default and default.node_sound_wood_defaults() or nil,
 	on_rightclick = function(pos, node, clicker, itemstack)
 		node.name = "computers:server_on"
 		minetest.set_node(pos, node)
@@ -269,7 +269,7 @@ minetest.register_node("computers:server_on", {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.25, 0.5, 1.125, 0.4375}
 	},
-	sounds = default.node_sound_wood_defaults(),
+	sounds = default and default.node_sound_wood_defaults() or nil,
 	drop = 'computers:server',
 	on_rightclick = function(pos, node, clicker, itemstack)
 		node.name = "computers:server"
@@ -289,7 +289,7 @@ minetest.register_node("computers:printer", {
 	paramtype2 = "facedir",
 	walkable = true,
 	groups = {snappy=3},
-	sound = default.node_sound_wood_defaults(),
+	sound = default and default.node_sound_wood_defaults() or nil,
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
