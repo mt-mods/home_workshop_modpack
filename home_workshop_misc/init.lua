@@ -96,7 +96,9 @@ else
 end
 
 local MODPATH = minetest.get_modpath("home_workshop_misc")
-if minetest.get_modpath("default") and minetest.get_modpath("basic_materials") then dofile(MODPATH.."/crafts.lua") end
+if minetest.get_modpath("default") and minetest.get_modpath("basic_materials") then
+	dofile(MODPATH.."/crafts.lua")
+end
 
 minetest.register_alias("homedecor:tool_cabinet",        "home_workshop_misc:tool_cabinet")
 minetest.register_alias("homedecor:tool_cabinet_bottom", "home_workshop_misc:tool_cabinet")
