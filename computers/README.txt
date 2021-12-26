@@ -1,6 +1,7 @@
 ﻿
 Decorative Computers Mod for Minetest
-by Diego Martínez <kaeza@users.sf.net>
+by Diego Martínez <kaeza@users.sf.net> and contributors
+license [MIT](https://spdx.org/licenses/MIT.html)
 
 How to install:
 Unzip the archive an place it in minetest-base-directory/mods/minetest/
@@ -47,5 +48,3 @@ Thanks to all the people in the forums and the #minetest IRC channel for
 
 See also:
 http://minetest.net/
-
-license WTFPL https://github.com/minetest-mods/computer/blob/master/README.txt#L36-L38
