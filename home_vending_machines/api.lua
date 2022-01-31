@@ -49,6 +49,16 @@ local function reg_simple(name, def)
             end
         end
     })
+    if def.craft_items ~= nil then
+        minetest.register_craft({
+            output = name,
+            recipe = {
+                {"default:steel_ingot",def.craft_items[1],"default:steel_ingot"},
+                {"default:steel_ingot",def.craft_items[2],"default:steel_ingot"},
+                {"default:steel_ingot","default:copperblock","default_steel_ingot"}
+            }
+        })
+    end
 end
 
 function home_vending_machines.register_machine(type, name, def)

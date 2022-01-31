@@ -7,7 +7,8 @@ home_vending_machines.register_machine("simple", "home_workshop_misc:soda_machin
     sounds = nil,
     _vmachine = {
         item = "home_vending_machines:soda_can"
-    }
+    },
+    craft_items = {"group:vessel","group:food_sugar"}
 })
 
 home_vending_machines.register_machine("simple", "home_vending_machines:drink_machine", {
@@ -16,7 +17,8 @@ home_vending_machines.register_machine("simple", "home_vending_machines:drink_ma
     sounds = nil,
     _vmachine = {
         item = {"home_vending_machines:soda_can", "home_vending_machines:water_bottle"}
-    }
+    },
+    craft_items = {"group:vessel","default:steel_ingot"}
 })
 
 home_vending_machines.register_machine("simple", "home_vending_machines:sweet_machine", {
@@ -25,5 +27,6 @@ home_vending_machines.register_machine("simple", "home_vending_machines:sweet_ma
     sounds = nil,
     _vmachine = {
         item = "home_vending_machines:soda_can"
-    }
+    },
+    craft_items = {"group:food_sugar", "default:steel_ingot"}
 })
