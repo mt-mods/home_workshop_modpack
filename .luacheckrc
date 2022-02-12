@@ -7,7 +7,7 @@ globals = {
     "minetest", "core",
 
     --mod provided
-    "home_vending_machines",
+    "home_vending_machines", "computers",
 }
 
 read_globals = {
@@ -21,5 +21,5 @@ read_globals = {
     "vector", "ItemStack", "dump", "DIR_DELIM", "VoxelArea", "Settings", "PcgRandom", "VoxelManip", "PseudoRandom",
 
     --mod produced
-    "default", "screwdriver", "unifieddyes", "computers",
+    "default", "screwdriver", "unifieddyes",
 }
