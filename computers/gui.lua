@@ -122,14 +122,30 @@ function computers.load_gui(pos, node, clicker)
                     border = false,
                 },
                 on_event = function(form, player, element, value)
-                    minetest.chat_send_all("value: " .. value)
                     local cindex = futil.get_index_by_name(form, "terminal_ctn")
                     local eindex = futil.get_index_by_name(form[cindex], "terminal_output")
                     local text = form[cindex][eindex].default
-                    form[cindex][eindex].default = text .. "user:~$ " .. value .. "\n"
+                    --form[cindex][eindex].default = text .. "user:~$ " .. value .. "\n"
 
                     if value == "clear" then
                         form[cindex][eindex].default = "user:~$\n"
+                    end
+
+                    local cdata = value:split(" ", false, 1)
+
+                    if computers.registered_commands[cdata[1]] then
+                        form[cindex][eindex].default = text .. "user:~$ " .. cdata[1] .. "\n"
+                        text = form[cindex][eindex].default
+                        local output = computers.registered_commands[cdata[1]](cdata[2])
+                        if output and output ~= "" and type(output) == "string" then
+                            form[cindex][eindex].default = text .. output .. "\n"
+                        end
+                    elseif value == "clear" then
+                        form[cindex][eindex].default = "user:~$\n"
+                    elseif value == "" then
+                        form[cindex][eindex].default = text .. "user:~$\n"
+                    else
+                        form[cindex][eindex].default = text .. "user:~$ " .. value .. "\nERROR: command not found\n"
                     end
 
                     return form
