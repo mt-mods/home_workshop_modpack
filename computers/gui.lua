@@ -1,8 +1,6 @@
 --local usage
 local futil = computers.formspec
 
-computers.show_formspec = computers.formspec.show_formspec
-
 function computers.load_gui(pos, node, clicker)
     --minetest.chat_send_all("test")
     local function select_btn(form, btn)
@@ -49,9 +47,6 @@ function computers.load_gui(pos, node, clicker)
             label = "Terminal",
             on_event = function(form, player, element)
                 select_btn(form, "terminal")
-                --[[ minetest.chat_send_all("delim")
-                minetest.chat_send_all("browser: " .. form[futil.get_index_by_name(form, "browser_ctn")].state)
-                minetest.chat_send_all("terminal: " .. form[futil.get_index_by_name(form, "terminal_ctn")].state) ]]
 
                 return form
             end,
@@ -72,9 +67,6 @@ function computers.load_gui(pos, node, clicker)
             label = "Browser",
             on_event = function(form, player, element)
                 select_btn(form, "browser")
-                --[[ minetest.chat_send_all("delim")
-                minetest.chat_send_all("browser: " .. form[futil.get_index_by_name(form, "browser_ctn")].state)
-                minetest.chat_send_all("terminal: " .. form[futil.get_index_by_name(form, "terminal_ctn")].state) ]]
 
                 return form
             end,
@@ -97,35 +89,52 @@ function computers.load_gui(pos, node, clicker)
                 y = 0,
                 w = 10,
                 h = 11,
-                texture_name = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff70"
+                texture_name = "[combine:16x16^[noalpha"
             },
             {
-                type = "label",
-                x = 1,
-                y = 1.5,
-                label = "terminal pane",
+                type = "textarea",
+                x = 0,
+                y = 0,
+                w = 10,
+                h = 10,
+                name = "terminal_output",
+                read_only = 1,
+                --label = "test",
+                default = "user:~$ test command\ntest output\n",
             },
             {
-                type = "button",
-                x = 1,
-                y = 2,
-                w = 5,
-                h = 2,
-                name = "test_btn",
-                label = "test btn",
-                on_event = function(form, player, element)
-                    local cindex = futil.get_index_by_name(form, "test_btn")
-                    form[cindex] = {type = "label", x=1, y=3, label = "test button label"}
+                type = "box",
+                x = 0,
+                y = 10,
+                w = 10,
+                h = 1,
+                color = "#ffffff"
+            },
+            {
+                type = "field",
+                x = 0,
+                y = 10,
+                w = 10,
+                h = 1,
+                name = "terminal_input",
+                close_on_enter = false,
+                props = {
+                    border = false,
+                },
+                on_event = function(form, player, element, value)
+                    minetest.chat_send_all("value: " .. value)
+                    local cindex = futil.get_index_by_name(form, "terminal_ctn")
+                    local eindex = futil.get_index_by_name(form[cindex], "terminal_output")
+                    local text = form[cindex][eindex].default
+                    form[cindex][eindex].default = text .. "user:~$ " .. value .. "\n"
+
+                    if value == "clear" then
+                        form[cindex][eindex].default = "user:~$\n"
+                    end
 
                     return form
                 end,
-                props = {
-                    border = false,
-                    bgimg = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff70",
-                    bgimg_hovered = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff90",
-                    bgimg_middle = "4,4",
-                }
-            }
+            },
         },
         {
             type = "container",
@@ -147,8 +156,30 @@ function computers.load_gui(pos, node, clicker)
                 y = 1.5,
                 label = "browser pane",
             },
-        }
+            {
+                type = "button",
+                x = 1,
+                y = 2,
+                w = 5,
+                h = 2,
+                name = "test_btn",
+                label = "test btn",
+                on_event = function(form, player, element)
+                    local cindex = futil.get_index_by_name(form, "browser_ctn")
+                    local eindex = futil.get_index_by_name(form[cindex], "test_btn")
+                    form[cindex][eindex] = {type = "label", x=1, y=3, label = "test button label"}
+
+                    return form
+                end,
+                props = {
+                    border = false,
+                    bgimg = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff70",
+                    bgimg_hovered = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff90",
+                    bgimg_middle = "4,4",
+                }
+            }
+        },
     }
 
-    computers.show_formspec(clicker, "computers:gui", formspec)
+    futil.show_formspec(clicker, "computers:gui", formspec)
 end

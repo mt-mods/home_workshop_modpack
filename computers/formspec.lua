@@ -4,6 +4,7 @@ computers.formspec = {}
 computers.formspec.get_element_by_name = formspec_ast.get_element_by_name
 
 function computers.formspec.get_index_by_name(tree, name)
+    --this doesnt support containers, use this to get container index and then pass container as tree
     if type(tree) ~= "table" then return end
 
     for key, element in pairs(tree) do
@@ -45,15 +46,25 @@ function computers.formspec.convert_to_ast(form)
 
     local function rfind(fs)
         for key, val in pairs(fs) do
-            if type(val) == "table" and val.type and val.type:find("container") then
-                if val.state and val.state == 1 then
-                    --cant use nil so swaping in thing that will never render
-                    fs[key] = {type = "label",x = 100,y = 100,label = "nil",}
-                else
-                    rfind(val)
+            if type(val) == "table" then
+                if val.type and val.type:find("container") then
+                    if val.state and val.state == 1 then
+                        --cant use nil so swaping in thing that will never render
+                        fs[key] = {type = "label",x = 100,y = 100,label = "nil",}
+                    else
+                        rfind(val)
+                    end
+                elseif val.props then
+                    table.insert(styles, {type = "style", selectors = val.selectors or {val.name}, props = val.props})
+                elseif val.read_only == 1 then
+                    val.name = nil
                 end
-            elseif type(val) == "table" and val.props then
-                table.insert(styles, {type = "style", selectors = val.selectors or {val.name}, props = val.props})
+                if val.type == "field" then
+                    table.insert(
+                        styles,
+                        {type = "field_close_on_enter", name = val.name, close_on_enter = val.close_on_enter}
+                    )
+                end
             end
         end
     end
@@ -92,7 +103,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 
     if element and element.on_event then
         --on_event(form, player, element)
-        local form = element.on_event(registered_astk[pname], player, element)
+        local form = element.on_event(registered_astk[pname], player, element, fields[keys[1]])
 
         if form then computers.formspec.show_formspec(player, formname, form) end
     end
