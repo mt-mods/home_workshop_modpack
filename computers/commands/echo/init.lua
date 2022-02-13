@@ -1,4 +1,4 @@
-function echo(input)
+function echo(pos, input, data)
     return input
 end
 

@@ -1,0 +1,7 @@
+{
+    "name": "ls",
+    "license": "MIT",
+    "version": 0.1,
+    "engine": 0.4,
+    "help": "lists out all files and folders in the current path"
+}

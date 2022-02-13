@@ -1,0 +1,7 @@
+{
+    "name": "mkdir",
+    "license": "MIT",
+    "version": 0.1,
+    "engine": 0.4,
+    "help": "makes a dir in the current path"
+}

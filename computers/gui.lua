@@ -100,7 +100,7 @@ function computers.load_gui(pos, node, clicker)
                 name = "terminal_output",
                 read_only = 1,
                 --label = "test",
-                default = "user:~$ test command\ntest output\n",
+                default = "welcome to kuto\nversion " .. computers.os.version .. "\n\nuser:~$ ",
             },
             {
                 type = "box",
@@ -118,6 +118,7 @@ function computers.load_gui(pos, node, clicker)
                 h = 1,
                 name = "terminal_input",
                 close_on_enter = false,
+                pwd = "",
                 props = {
                     border = false,
                 },
@@ -125,27 +126,30 @@ function computers.load_gui(pos, node, clicker)
                     local cindex = futil.get_index_by_name(form, "terminal_ctn")
                     local eindex = futil.get_index_by_name(form[cindex], "terminal_output")
                     local text = form[cindex][eindex].default
-                    --form[cindex][eindex].default = text .. "user:~$ " .. value .. "\n"
+                    local pass_table = {
+                        element = element
+                    }
 
                     if value == "clear" then
-                        form[cindex][eindex].default = "user:~$\n"
+                        form[cindex][eindex].default = "user:~" .. element.pwd .."$" .."\n"
                     end
 
                     local cdata = value:split(" ", false, 1)
 
                     if computers.registered_commands[cdata[1]] then
-                        form[cindex][eindex].default = text .. "user:~$ " .. cdata[1] .. "\n"
+                        form[cindex][eindex].default = text .. value .. "\n"
                         text = form[cindex][eindex].default
-                        local output = computers.registered_commands[cdata[1]](cdata[2])
-                        if output and output ~= "" and type(output) == "string" then
-                            form[cindex][eindex].default = text .. output .. "\n"
+                        local output = computers.registered_commands[cdata[1]](pos, cdata[2], pass_table)
+                        if output and type(output) == "string" then
+                            form[cindex][eindex].default = text .. output .. "\n" .. "user:~" .. element.pwd .."$" .." "
                         end
                     elseif value == "clear" then
-                        form[cindex][eindex].default = "user:~$\n"
+                        form[cindex][eindex].default = "user:~$ "
                     elseif value == "" then
-                        form[cindex][eindex].default = text .. "user:~$\n"
+                        form[cindex][eindex].default = text .. "user:~" .. element.pwd .."$" .. "\n"
                     else
-                        form[cindex][eindex].default = text .. "user:~$ " .. value .. "\nERROR: command not found\n"
+                        form[cindex][eindex].default = text .. value ..
+                            "\nERROR: command not found\n" .. "user:~" .. element.pwd .."$" .. " "
                     end
 
                     return form
