@@ -43,11 +43,15 @@ end
 function computers.formspec.convert_to_ast(form)
     local styles = {}
 
-
     local function rfind(fs)
         for key, val in pairs(fs) do
             if type(val) == "table" and val.type and val.type:find("container") then
-                rfind(val)
+                if val.state and val.state == 1 then
+                    --cant use nil so swaping in thing that will never render
+                    fs[key] = {type = "label",x = 100,y = 100,label = "nil",}
+                else
+                    rfind(val)
+                end
             elseif type(val) == "table" and val.props then
                 table.insert(styles, {type = "style", selectors = val.selectors or {val.name}, props = val.props})
             end
@@ -68,8 +72,8 @@ function computers.formspec.show_formspec(player, formname, fs)
         playername = player:get_player_name()
     end
     if type(fs) == "table" then
+        registered_astk[playername] = table.copy(fs)
         formspec = formspec_ast.unparse(computers.formspec.convert_to_ast(fs))
-        registered_astk[playername] = fs
     end
 
     minetest.show_formspec(playername, formname, formspec)
