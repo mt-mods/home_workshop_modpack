@@ -1,6 +1,12 @@
 computers.registered_commands = {}
 computers.registered_confs = {}
 
+minetest.register_privilege("computers_filesystem", {
+    description = "advanced use of computers filesystem",
+    give_to_singleplayer = false,
+    give_to_admin = false,
+})
+
 function computers.register_command(modpath)
     local func = dofile(modpath .. "/init.lua")
     local f = io.open(modpath .. "/conf.json")

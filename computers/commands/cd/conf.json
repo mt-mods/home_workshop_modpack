@@ -1,7 +1,7 @@
 {
     "name": "cd",
     "license": "MIT",
-    "version": 0.1,
-    "engine": 0.4,
+    "version": 0.11,
+    "engine": 0.41,
     "help": "move in and out of folders"
 }

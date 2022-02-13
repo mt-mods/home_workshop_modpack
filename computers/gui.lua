@@ -127,7 +127,8 @@ function computers.load_gui(pos, node, clicker)
                     local eindex = futil.get_index_by_name(form[cindex], "terminal_output")
                     local text = form[cindex][eindex].default
                     local pass_table = {
-                        element = element
+                        element = element,
+                        player = player
                     }
 
                     if value == "clear" then
@@ -136,17 +137,20 @@ function computers.load_gui(pos, node, clicker)
 
                     local cdata = value:split(" ", false, 1)
 
-                    if computers.registered_commands[cdata[1]] then
+                    if value == "clear" then
+                        form[cindex][eindex].default = "user:~$ "
+                    elseif value == "" then
+                        form[cindex][eindex].default = text .. "user:~" .. element.pwd .."$" .. "\n"
+                    elseif computers.registered_commands[cdata[1]] and cdata[2] == "-v" then
+                        form[cindex][eindex].default = text .. value .. "\n" ..
+                            computers.registered_confs[cdata[1]].version .. "\nuser:~" .. element.pwd .."$" .. "\n"
+                    elseif computers.registered_commands[cdata[1]] then
                         form[cindex][eindex].default = text .. value .. "\n"
                         text = form[cindex][eindex].default
                         local output = computers.registered_commands[cdata[1]](pos, cdata[2], pass_table)
                         if output and type(output) == "string" then
                             form[cindex][eindex].default = text .. output .. "\n" .. "user:~" .. element.pwd .."$" .." "
                         end
-                    elseif value == "clear" then
-                        form[cindex][eindex].default = "user:~$ "
-                    elseif value == "" then
-                        form[cindex][eindex].default = text .. "user:~" .. element.pwd .."$" .. "\n"
                     else
                         form[cindex][eindex].default = text .. value ..
                             "\nERROR: command not found\n" .. "user:~" .. element.pwd .."$" .. " "

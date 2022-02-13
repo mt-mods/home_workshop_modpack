@@ -8,7 +8,7 @@ minetest.mkdir(computers.devicepath) --make sure it exists
 minetest.mkdir(computers.networkpath) --make sure it exists
 
 computers.os = {
-    version = 0.4,
+    version = 0.41,
     name = "kuto",
     authors = {"wsor", "luk3yx"},
     license = "MIT",
