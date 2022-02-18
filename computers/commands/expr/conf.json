@@ -1,0 +1,7 @@
+{
+    "name": "expr",
+    "license": "MIT",
+    "version": 0.1,
+    "engine": 0.42,
+    "help": "exicutes mathmatical expresions"
+}

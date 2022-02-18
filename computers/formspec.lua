@@ -1,5 +1,5 @@
-local registered_astk = {}
 computers.formspec = {}
+computers.formspec.registered_kast = {}
 
 computers.formspec.get_element_by_name = formspec_ast.get_element_by_name
 
@@ -83,7 +83,7 @@ function computers.formspec.show_formspec(player, formname, fs)
         playername = player:get_player_name()
     end
     if type(fs) == "table" then
-        registered_astk[playername] = table.copy(fs)
+        computers.formspec.registered_kast[playername] = table.copy(fs)
         formspec = formspec_ast.unparse(computers.formspec.convert_to_ast(fs))
     end
 
@@ -94,16 +94,38 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
     if formname ~= "computers:gui" then return end
     local pname = player:get_player_name()
 
-    if fields.quit then registered_astk[pname] = nil return end
+    if fields.quit then computers.formspec.registered_kast[pname] = nil return end
+
+    --[[
+        trying to figure out what a player actually did can be a mess
+        input can validly be nil for a text field sometimes, othertimes it can come in first
+        when a user has actual selected a button. buttons only come in when selected,
+        so we override whatever the first key is if there a button since we are sure it was pressed
+        since we cant get types from fields, we rely on the button being named name_btn with _btn being a suffix
+    ]]
 
     local keys = {}
-    for key, val in pairs(fields) do table.insert(keys, key) end
+    local btn_override
+    for key, val in pairs(fields) do
+        table.insert(keys, key)
+        local split = key:split("_")
+        if #split >= 2 and split[2] == "btn" then btn_override = key end
+    end
 
-    local element = computers.formspec.get_element_by_name(registered_astk[pname], keys[1])
+    local element = computers.formspec.get_element_by_name(
+        computers.formspec.registered_kast[pname],
+        btn_override or keys[1]
+    )
 
     if element and element.on_event then
         --on_event(form, player, element)
-        local form = element.on_event(registered_astk[pname], player, element, fields[keys[1]])
+        local form = element.on_event(
+            computers.formspec.registered_kast[pname],
+            player,
+            element,
+            fields[btn_override or keys[1]],
+            fields
+        )
 
         if form then computers.formspec.show_formspec(player, formname, form) end
     end

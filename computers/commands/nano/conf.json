@@ -1,0 +1,7 @@
+{
+    "name": "nano",
+    "license": "MIT",
+    "version": 0.1,
+    "engine": 0.42,
+    "help": "allows editing of files"
+}
