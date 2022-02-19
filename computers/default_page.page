@@ -1,0 +1,18 @@
+<global margin=20>
+<normal>ㅤ</normal>
+<center><bigger>Welcome to ARPANET</bigger></center>
+<big>How to use it</big>
+<normal>on the bottom of this pane is field input which allows you to enter site urls</normal>
+<normal>example: <mono><style color=blue>domain</style></mono></normal>
+<normal>example: <mono><style color=blue>domain/demo_page.page</style></mono></normal>
+<normal>ㅤ</normal>
+
+<big>Try it out</big>
+<action name=demo_link _href=demo_page>test url</action>
+<normal>ㅤ</normal>
+
+<big>How can I host my own sites?</big>
+<normal>you will need to set up the server node</normal>
+<normal>put your webfiles in there in hypertext format in the public_html folder</normal>
+<normal>domainname/ and domainname/folder/ will connect to the indexpage file found in the DIR</normal>
+<normal>ㅤ</normal>

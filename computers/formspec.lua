@@ -117,6 +117,9 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         btn_override or keys[1]
     )
 
+    --minetest.chat_send_all(keys[1])
+    --minetest.chat_send_all(fields[keys[1]])
+
     if element and element.on_event then
         --on_event(form, player, element)
         local form = element.on_event(
@@ -130,3 +133,29 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         if form then computers.formspec.show_formspec(player, formname, form) end
     end
 end)
+
+--[[
+    yes, i know this isnt perfect
+    requires a name field in the subtags
+    returns a table keyed by the name field with sub tables containing the other sub tags
+]]
+function computers.formspec.get_hypertext_subtags(hypertext, tag)
+    local adata = {}
+    for a in string.gmatch(hypertext, "<"..tag..".->.-</"..tag..">") do
+        local len = #tag+1
+        local tags = string.split(string.sub(a:split(">")[1], len, -1), " ")
+        local name
+        local storage = {}
+        for _, tag_string in pairs(tags) do
+            local split = tag_string:split("=")
+            if split[1] == "name" then
+                name = split[2]
+            else
+                storage[split[1]] = split[2]
+            end
+        end
+        adata[name] = storage
+    end
+    --minetest.chat_send_all(dump(adata))
+    return adata
+end

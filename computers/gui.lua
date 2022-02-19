@@ -2,6 +2,13 @@ computers.gui = {}
 
 local futil = computers.formspec
 
+local f = io.open(computers.modpath .. "/default_page.page")
+local default_page = f:read("*all")
+f:close()
+f = io.open(computers.modpath .. "/demo_page.page")
+local demo_page = f:read("*all")
+f:close()
+
 local function select_btn(form, btn)
     --to hardcoded
     for _, obtn in pairs(form.tabs) do
@@ -170,63 +177,78 @@ function computers.gui.load(pos, node, clicker)
             state = 1,
             x = 0,
             y = 1,
+            --[[
+                hardcoded background for now, need to build in custom element support
+                into hypertext to map to formspec elements
+                ]]
             {
                 type = "background",
                 x = 0,
                 y = 0,
                 w = 10,
-                h = 11,
-                texture_name = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff70"
+                h = 10,
+                texture_name = "[combine:16x16^[noalpha^[colorize:#ffffff70"
             },
             {
-                type = "label",
-                x = 1,
-                y = 1.5,
-                label = "browser pane",
+                type = "hypertext",
+                name = "browser_content",
+                x = 0,
+                y = 0,
+                w = 10,
+                h = 10,
+                text = default_page,
+                on_event = function(form, player, element, value, fields)
+                    --minetest.chat_send_all("reached")
+
+                    --hard coding some network stuff for now
+                    local name = value:split(":")[2]
+
+                    local tags = futil.get_hypertext_subtags(element.text, "action")
+                    if tags[name] and tags[name]._href and tags[name]._href == "demo_page" then
+                        --minetest.chat_send_all(tags[name]._href)
+                        element.text = demo_page
+                    elseif tags[name] and tags[name]._href and tags[name]._href == "default_page" then
+                        element.text = default_page
+                    end
+
+                    return form
+                end
             },
             {
-                type = "button",
-                x = 1,
-                y = 2,
-                w = 5,
-                h = 2,
-                name = "test_btn",
-                label = "test btn",
-                on_event = function(_, player, element)
-                    --local cindex = futil.get_index_by_name(form, "browser_ctn")
-                    --local eindex = futil.get_index_by_name(form[cindex], "test_btn")
-                    --form[cindex][eindex] = {type = "label", x=1, y=3, label = "test button label"}
-                    local form = computers.gui.add_tab(player, "Tname", {
-                        type = "container",
-                        name = "tname_ctn",
-                        state = 1,
-                        x = 0,
-                        y = 1,
-                        {
-                            type = "background",
-                            x = 0,
-                            y = 0,
-                            w = 10,
-                            h = 11,
-                            texture_name = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff70"
-                        },
-                        {
-                            type = "label",
-                            x = 1,
-                            y = 1.5,
-                            label = "Tname pane",
-                        },
-                    })
+                type = "background",
+                x = 0,
+                y = 10,
+                w = 10,
+                h = 1,
+                texture_name = "[combine:16x16^[noalpha"
+            },
+            {
+                type = "box",
+                x = 0,
+                y = 10,
+                w = 10,
+                h = 1,
+                color = "#ffffff"
+            },
+            {
+                type = "field",
+                x = 0,
+                y = 10,
+                w = 10,
+                h = 1,
+                name = "browser_url",
+                close_on_enter = false,
+                pwd = "",
+                props = {
+                    border = false,
+                },
+                on_event = function(form, player, element, value, fields)
+                    --minetest.chat_send_all("url entered")
+                    computers.api.chat_send_player(player, "[computers]: networking not currently supported")
 
                     return form
                 end,
-                props = {
-                    border = false,
-                    bgimg = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff70",
-                    bgimg_hovered = "kuto_button.png^[combine:16x16^[noalpha^[colorize:#ffffff90",
-                    bgimg_middle = "4,4",
-                }
-            }
+            },
         },
     }
 
@@ -293,3 +315,7 @@ function computers.gui.add_tab(player, tname, tab)
 
     return fs
 end
+
+--[[ minetest.register_on_player_receive_fields(function(player, formname, fields)
+    minetest.chat_send_all(dump(fields))
+end) ]]

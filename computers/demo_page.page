@@ -1,0 +1,7 @@
+<global margin=20>
+<normal>ㅤ</normal>
+<center><bigger>Welcome to Demo Page</bigger></center>
+<normal>ㅤ</normal>
+
+<action name=default_link _href=default_page>go back</action>
+<normal>ㅤ</normal>
