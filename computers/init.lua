@@ -8,7 +8,7 @@ minetest.mkdir(computers.devicepath) --make sure it exists
 minetest.mkdir(computers.networkpath) --make sure it exists
 
 computers.os = {
-    version = 0.42,
+    version = 0.43,
     name = "kuto",
     authors = {"wsor", "luk3yx"},
     license = "MIT",
@@ -17,6 +17,7 @@ computers.os = {
 dofile(computers.modpath .. "/old_stuff/init.lua")
 
 dofile(computers.modpath .. "/api.lua")
+dofile(computers.modpath .. "/networks.lua")
 dofile(computers.modpath .. "/formspec.lua")
 dofile(computers.modpath .. "/commands.lua")
 dofile(computers.modpath .. "/gui.lua")

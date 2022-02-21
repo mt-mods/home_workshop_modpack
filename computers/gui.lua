@@ -243,8 +243,17 @@ function computers.gui.load(pos, node, clicker)
                     border = false,
                 },
                 on_event = function(form, player, element, value, fields)
-                    --minetest.chat_send_all("url entered")
-                    computers.api.chat_send_player(player, "[computers]: networking not currently supported")
+                    local id = minetest.get_meta(pos):get("net_id")
+                    if id then
+                        local status, data = computers.networks.resolve_url(id, pos, value)
+                        if status and data then
+                            local cindex = futil.get_index_by_name(form, "browser_ctn")
+                            local eindex = futil.get_index_by_name(form[cindex], "browser_content")
+                            form[cindex][eindex].text = data
+                        end
+                    else
+                        computers.api.chat_send_player(player, "[computers]: not attached to a network")
+                    end
 
                     return form
                 end,

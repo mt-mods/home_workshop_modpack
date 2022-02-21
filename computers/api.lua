@@ -25,7 +25,7 @@ computers.sandbox.default_env = {}
 
     os.clock os.difftime os.time
 
-    string.byte string.char  string.format
+    string.byte string.char
     string.len  string.lower string.reverse
     string.sub  string.upper
 
@@ -130,4 +130,13 @@ function computers.api.chat_send_player(player, msg)
     local name = player
     if type(name) == "userdata" then name = player:get_player_name() end
     minetest.chat_send_player(name, msg)
+end
+
+--basically for dev usage only
+function computers.api.benchmark(func, ...)
+    local start_time = minetest.get_us_time()
+    for i=1, 1000 do
+        func(...)
+    end
+    minetest.chat_send_all(minetest.get_us_time()-start_time)
 end

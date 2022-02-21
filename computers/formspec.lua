@@ -75,6 +75,8 @@ function computers.formspec.convert_to_ast(form)
     return fs
 end
 
+local forms = {}
+
 function computers.formspec.show_formspec(player, formname, fs)
     local playername = player
     local formspec = fs
@@ -87,11 +89,21 @@ function computers.formspec.show_formspec(player, formname, fs)
         formspec = formspec_ast.unparse(computers.formspec.convert_to_ast(fs))
     end
 
+    forms[formname] = true
+
     minetest.show_formspec(playername, formname, formspec)
 end
 
+function computers.formspec.close_formspec(player, formname)
+    local name = player
+    if type(name) == "userdata" then name = player:get_player_name() end
+
+    minetest.close_formspec(name, formname or "")
+end
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
-    if formname ~= "computers:gui" then return end
+    --if formname ~= "computers:gui" then return end
+    if not forms[formname] then return end
     local pname = player:get_player_name()
 
     if fields.quit then computers.formspec.registered_kast[pname] = nil return end
@@ -117,7 +129,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
         btn_override or keys[1]
     )
 
-    --minetest.chat_send_all(keys[1])
+    --minetest.chat_send_all(btn_override or keys[1])
     --minetest.chat_send_all(fields[keys[1]])
 
     if element and element.on_event then

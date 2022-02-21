@@ -1,0 +1,7 @@
+{
+    "name": "net",
+    "license": "MIT",
+    "version": 0.1,
+    "engine": 0.43,
+    "help": "configuration related to networking"
+}
