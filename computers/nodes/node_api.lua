@@ -1,5 +1,3 @@
---computers = {}
-
 computers.register = function (name, def)
 	if (name:sub(1, 1) == ":") then name = name:sub(2) end
 	local modname, basename = name:match("^([^:]+):(.*)")
@@ -89,12 +87,4 @@ computers.pixelnodebox = function (size, boxes)
 		type = "fixed",
 		fixed = fixed
 	}
-end
-
-local MODPATH = minetest.get_modpath("computers") .. "/old_stuff"
-dofile(MODPATH.."/computers.lua")
-dofile(MODPATH.."/aliases.lua")
-
-if minetest.get_modpath("default") and minetest.get_modpath("basic_materials") then
-	dofile(MODPATH.."/recipes.lua")
 end

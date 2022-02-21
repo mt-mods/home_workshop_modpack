@@ -1,5 +1,3 @@
--- Copyright (C) 2012-2013 Diego Martínez <kaeza@users.sf.net>
-
 minetest.register_craft({
 	output = "computers:shefriendSOO",
 	recipe = {

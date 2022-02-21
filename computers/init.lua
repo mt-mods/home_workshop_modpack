@@ -14,12 +14,12 @@ computers.os = {
     license = "MIT",
 }
 
-dofile(computers.modpath .. "/old_stuff/init.lua")
-
 dofile(computers.modpath .. "/api.lua")
 dofile(computers.modpath .. "/networks.lua")
 dofile(computers.modpath .. "/formspec.lua")
 dofile(computers.modpath .. "/commands.lua")
 dofile(computers.modpath .. "/gui.lua")
+
+dofile(computers.modpath .. "/nodes/init.lua")
+
 dofile(computers.modpath .. "/demo.lua")
-dofile(computers.modpath .. "/tetris.lua")
