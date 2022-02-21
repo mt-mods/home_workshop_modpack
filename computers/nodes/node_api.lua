@@ -58,18 +58,6 @@ computers.register = function (name, def)
 	})
 end
 
-computers.register_handheld = function (name, def)
-	if (name:sub(1, 1) == ":") then name = name:sub(2) end
-	local modname, basename = name:match("^([^:]+):(.*)")
-	local TEXPFX = modname.."_"..basename.."_inv"
-	local ONSTATE = modname..":"..basename
-	minetest.register_craftitem(ONSTATE, {
-		description = def.description,
-		inventory_image = TEXPFX..".png",
-		wield_image = TEXPFX..".png"
-	})
-end
-
 computers.pixelnodebox = function (size, boxes)
 	local fixed = { }
 	for _, box in ipairs(boxes) do
