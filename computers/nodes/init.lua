@@ -2,6 +2,7 @@ local path = computers.modpath .. "/nodes"
 
 dofile(path .. "/node_api.lua")
 dofile(path .. "/nodes.lua")
+dofile(path .. "/router.lua")
 dofile(path .. "/tetris.lua")
 dofile(path .. "/aliases.lua")
 

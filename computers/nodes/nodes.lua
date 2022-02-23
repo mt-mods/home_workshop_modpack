@@ -154,38 +154,6 @@ minetest.register_node("computers:monitor_on", {
 	end
 })
 
---WIFI Router (linksys look-a-like)
-minetest.register_node("computers:router", {
-	description = S("WIFI Router"),
-	inventory_image = "computers_router_inv.png",
-	tiles = {
-		"computers_router_t.png",
-		"computers_router_bt.png",
-		"computers_router_l.png",
-		"computers_router_r.png",
-		"computers_router_b.png",
-		{
-			name = "computers_router_f_animated.png",
-			animation = {type="vertical_frames", aspect_w=32, aspect_h=32, length=1.0}
-		},
-	}, --"computers_router_f.png"},
-	paramtype = "light",
-	paramtype2 = "facedir",
-	walkable = false,
-	groups = {snappy=3},
-	sound = default and default.node_sound_wood_defaults() or nil,
-	drawtype = "nodebox",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.25, -0.5, -0.0625, 0.25, -0.375, 0.3125},
-			{-0.1875, -0.4375, 0.3125, -0.125, -0.1875, 0.375},
-			{0.125, -0.4375, 0.3125, 0.1875, -0.1875, 0.375},
-			{-0.0625, -0.4375, 0.3125, 0.0625, -0.25, 0.375}
-		}
-	}
-})
-
 local pct_cbox = {
 	type = "fixed",
 	fixed = { -0.1875, -0.5, -0.36, 0.1875, 0.34, 0.46 }
