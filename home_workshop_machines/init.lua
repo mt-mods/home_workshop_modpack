@@ -61,6 +61,28 @@ minetest.register_node("home_workshop_machines:3dprinter_corexy", {
 	on_rotate = unifieddyes.fix_after_screwdriver_nsew,
 })
 
+if minetest.get_modpath("basic_materials") then
+	minetest.register_craft({
+		output = "home_workshop_machines:3dprinter_bedflinger",
+		recipe = {
+			{"basic_materials:plastic_sheet", "dye:white", "basic_materials:plastic_sheet"},
+			{"basic_materials:motor", "basic_materials:heating_element", "basic_materials:motor"},
+			{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		},
+	})
+end
+
+if minetest.get_modpath("basic_materials") then
+	minetest.register_craft({
+		output = "home_workshop_machines:3dprinter_corexy",
+		recipe = {
+			{"default:steel_ingot", "basic_materials:motor", "basic_materials:plastic_sheet"},
+			{"default:glass", "basic_materials:heating_element", "default:glass"},
+			{"default:steel_ingot", "basic_materials:motor", "default:steel_ingot"},
+		},
+	})
+end
+
 minetest.register_alias("computer:3dprinter_bedflinger",  "home_workshop_machines:3dprinter_bedflinger")
 minetest.register_alias("computers:3dprinter_bedflinger", "home_workshop_machines:3dprinter_bedflinger")
 minetest.register_alias("computer:3dprinter_corexy",      "home_workshop_machines:3dprinter_corexy")
