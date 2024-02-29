@@ -15,6 +15,7 @@ computers.register = function (name, def)
 		description = cdef.description,
 		inventory_image = cdef.inventory_image,
 		groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2},
+		is_ground_content = false,
 		tiles = {
 			TEXPFX.."tp.png",
 			TEXPFX.."bt.png",
@@ -40,6 +41,7 @@ computers.register = function (name, def)
 		paramtype2 = "facedir",
 		use_texture_alpha = "clip",
 		groups = {snappy=2, choppy=2, oddly_breakable_by_hand=2, not_in_creative_inventory=1},
+		is_ground_content = false,
 		tiles = {
 			(TEXPFX.."tp"..(cdef.tiles_off.top    and "_off" or "")..".png"),
 			(TEXPFX.."bt"..(cdef.tiles_off.bottom and "_off" or "")..".png"),
