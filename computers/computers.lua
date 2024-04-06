@@ -85,7 +85,7 @@ minetest.register_node("computers:piepad", {
 	groups = {oddly_breakable_by_hand=2},
 	is_ground_content = false,
 	selection_box = {type = "wallmounted"},
-	sounds = default and default.node_sound_wood_defaults() or nil
+	sounds = xcompat.sounds.node_sound_wood_defaults()
 })
 
 -- Commodore 64 lookalike
@@ -182,7 +182,7 @@ minetest.register_node("computers:router", {
 	walkable = false,
 	groups = {snappy=3},
 	is_ground_content = false,
-	sound = default and default.node_sound_wood_defaults() or nil,
+	sound = xcompat.sounds.node_sound_wood_defaults(),
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
@@ -211,7 +211,7 @@ minetest.register_node("computers:tower", {
 	paramtype2 = "facedir",
 	groups = {snappy=3},
 	is_ground_content = false,
-	sound = default and default.node_sound_wood_defaults() or nil,
+	sound = xcompat.sounds.node_sound_wood_defaults(),
 	selection_box = pct_cbox,
 	collision_box = pct_cbox
 })
@@ -242,7 +242,7 @@ minetest.register_node("computers:server", {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.25, 0.5, 1.125, 0.4375}
 	},
-	sounds = default and default.node_sound_wood_defaults() or nil,
+	sounds = xcompat.sounds.node_sound_wood_defaults(),
 	on_rightclick = function(pos, node, clicker, itemstack)
 		node.name = "computers:server_on"
 		minetest.set_node(pos, node)
@@ -283,7 +283,7 @@ minetest.register_node("computers:server_on", {
 		type = "fixed",
 		fixed = {-0.5, -0.5, -0.25, 0.5, 1.125, 0.4375}
 	},
-	sounds = default and default.node_sound_wood_defaults() or nil,
+	sounds = xcompat.sounds.node_sound_wood_defaults(),
 	drop = 'computers:server',
 	on_rightclick = function(pos, node, clicker, itemstack)
 		node.name = "computers:server"
@@ -305,7 +305,7 @@ minetest.register_node("computers:printer", {
 	walkable = true,
 	groups = {snappy=3},
 	is_ground_content = false,
-	sound = default and default.node_sound_wood_defaults() or nil,
+	sound = xcompat.sounds.node_sound_wood_defaults(),
 	drawtype = "nodebox",
 	node_box = {
 		type = "fixed",
