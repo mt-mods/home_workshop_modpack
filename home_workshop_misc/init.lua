@@ -18,7 +18,7 @@ minetest.register_node("home_workshop_misc:tool_cabinet", {
 	paramtype2="facedir",
 	inventory_image = "home_workshop_misc_tool_cabinet_inv.png",
 	on_rotate = minetest.get_modpath("screwdriver") and screwdriver.rotate_simple or nil,
-	groups = { snappy=3 },
+	groups = { snappy=3, dig_tree=2 },
 	is_ground_content = false,
 	expand = { top="placeholder" },
 	inventory = {
@@ -37,7 +37,7 @@ minetest.register_node("home_workshop_misc:beer_tap", {
 	inventory_image = "home_workshop_misc_beertap_inv.png",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = { snappy=3 },
+	groups = { snappy=3, dig_tree=2 },
 	is_ground_content = false,
 	walkable = false,
 	selection_box = {
