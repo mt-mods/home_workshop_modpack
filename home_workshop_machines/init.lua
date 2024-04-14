@@ -73,9 +73,7 @@ if minetest.get_modpath("basic_materials") then
 			{materials.steel_ingot, materials.steel_ingot, materials.steel_ingot},
 		},
 	})
-end
 
-if minetest.get_modpath("basic_materials") then
 	minetest.register_craft({
 		output = "home_workshop_machines:3dprinter_corexy",
 		recipe = {
