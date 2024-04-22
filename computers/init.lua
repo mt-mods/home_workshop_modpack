@@ -100,6 +100,6 @@ dofile(MODPATH.."/computers.lua")
 dofile(MODPATH.."/gaming.lua")
 dofile(MODPATH.."/aliases.lua")
 
-if minetest.get_modpath("default") and minetest.get_modpath("basic_materials") then
+if minetest.get_modpath("basic_materials") then
 	dofile(MODPATH.."/recipes.lua")
 end
